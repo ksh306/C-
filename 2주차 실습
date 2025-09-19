@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+int main() {
+    
+    int x; //상품 개수(종류)
+    printf("상품 개수를 입력 : ");
+    scanf("%d", &x);
+
+    int stock[x], sales[x], remain[x]; // 입고 . 판매 , 재고
+
+    printf("상품별 입고 수량을 입력 :\n");
+    for (int i = 0; i < x; i++) {
+        scanf("%d", &stock[i]);
+    }
+
+    printf("상품별 판매 수량을 입력 :\n");
+    for (int i = 0; i < x; i++) {
+        scanf("%d", &sales[i]);
+    }
+    printf("\n");
+    
+    printf("재고수량 : ");
+    for (int i = 0; i < x; i++) {
+        remain[i] = stock[i] - sales[i];
+        if (remain[i] < 0) remain[i] = 0;
+        printf("%d ", remain[i]);
+    }
+    printf("\n");
+
+    int totalSales = 0, totalStock = 0; // 총 판매 , 총 입고
+    
+    for (int i = 0; i < x; i++) {
+        totalSales = totalSales + sales[i];
+        totalStock = totalStock + stock[i];
+    }
+    
+    float salesRate = ((float)totalSales / totalStock) * 100.0; //판매율
+
+    printf("총 판매량 : %d (판매율 %.2f%%)\n", totalSales, salesRate);
+
+    int max = sales[0], min = sales[0];
+    int maxID = 0, minID = 0;
+    
+    for (int i = 1; i < x; i++) {
+        if (sales[i] > max) {
+            max = sales[i];
+            maxID = i;
+        }
+        if (sales[i] < min) {
+            min = sales[i];
+            minID = i;
+        }
+    }
+
+    printf("가장 많이 판매된 상품 : ID %d, 판매량 %d\n", maxID+1, max);
+    printf("가장 적게 판매된 상품 : ID %d, 판매량 %d\n", minID+1, min);
+
+    for (int i = 0; i < x; i++) {
+        if (remain[i] <= 2) {
+            printf("상품 ID %d : 재고부족(%d)\n", i+1, remain[i]);
+        }
+    }
+
+    return 0;
+}
