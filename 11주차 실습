@@ -38,7 +38,6 @@ int main(){
         printf("error\n");
         return 1;
     }
-    //memset(p, 0, sizeof(Product) * count);
 
     while(menu != 7){
         printf("\n> 메뉴를 선택하세요 (1. 입고, 2. 판매, 3. 개별상품정보, 4. 전체상품정보, 5. 저장, 6. 불러오기, 7. 종료)\n> ");
